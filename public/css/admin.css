@@ -1,0 +1,80 @@
+:root {
+    --fuente-principal: #ff5538;
+    --fuente-secundaria: #0A8587;
+    --fuente-texto: #717171;
+}
+
+.navegacion {
+    background: var(--fuente-principal) !important;
+}
+
+.navegacion .desplegable {
+    color: #ffffff !important;
+    font-size: 3rem;
+    margin-top: 5px;
+}
+
+.imgtop {
+    margin-top: 15px;
+}
+
+.arrow-before {
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    /* izquierda flecha */
+    border-right: 10px solid transparent;
+    /* derecha flecha */
+    border-top: 10px solid var(--fuente-principal);
+    /* base flecha y color*/
+    font-size: 0px;
+    line-height: 0px;
+    top: 6px;
+    left: 4px;
+    position: relative;
+}
+
+.fondo-libro {
+    height: 200px;
+    background-image: url('../imgs/fondo-libros-min.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 50px;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+
+@media only screen and (max-width: 600px) {
+    .fondo-libro {
+        flex-wrap: wrap;
+        height: 300px;
+        justify-content: center;
+    }
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+
+@media only screen and (min-width: 600px) {}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+
+@media only screen and (min-width: 768px) {}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+
+@media only screen and (min-width: 992px) {}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+
+@media only screen and (min-width: 1200px) {}

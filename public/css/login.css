@@ -1,0 +1,69 @@
+:root {
+    --fuente-principal: #EA563C;
+    --fuente-secundaria: #0A8587;
+    --fuente-texto: #717171;
+}
+
+@font-face {
+    font-family: "Helvetica";
+    src: url('../fuentes/Helvetica/HelveticaWorld-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Monserrat";
+    src: url('../fuentes/monserrat/MontserratAlternates-Regular.otf');
+}
+
+body {
+    background-image: url('../imgs/dark-daylight-eerie-1165982.jpg');
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Monserrat";
+}
+
+.contenedor {
+    display: flex;
+    height: 100%;
+    border: 1px solid #0000;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarjeta {
+    background: var(--fuente-principal);
+    border-radius: 5px;
+}
+
+.tarjeta .logo_liwru {
+    padding: 30px;
+    color: #fff;
+    text-align: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarjeta .logo_liwru .arriba h2 {
+    margin-top: 10%;
+}
+
+.tarjeta .fondo-blanco {
+    background: #fff;
+    padding: 50px;
+}
+
+.boton {
+    border: 2px solid black;
+    background-color: var(--fuente-principal);
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.hecho {
+    border-color: var(--fuente-principal);
+    color: #fff;
+}

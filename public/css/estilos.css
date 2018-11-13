@@ -1,0 +1,282 @@
+:root {
+    --fuente-principal: #EA563C;
+    --fuente-secundaria: #0A8587;
+    --fuente-texto: #717171;
+}
+
+
+/* Style the input container */
+
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+
+/* Style the form icons */
+
+.icon {
+    padding: 12px;
+    background: #eeeeee;
+    color: #b3b3b3;
+    min-width: 50px;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+
+/* Style the input fields */
+
+.input-field {
+    width: 80%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.input-field:focus {
+    border: 2px solid #eeeeee;
+}
+
+.descubrir {
+    background: #f6f6f6;
+    font-family: 'Montserrat', sans-serif;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: -24px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.descubrir h3 img {
+    margin-right: 10px;
+}
+
+.descubrir .parrafo {
+    margin-top: 15px;
+    color: #4f4f4f;
+}
+
+.descubrir .active {
+    color: var(--fuente-principal) !important;
+}
+
+.lista-libros {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.lista-libros .libro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.lista-libros .libro .texto {
+    padding: 20px;
+}
+
+.lista-libros .libro .texto .tp {
+    margin-top: -5px;
+}
+
+.no-image .ima {
+    cursor: pointer !important;
+}
+
+.no-image .elegir {
+    display: none;
+}
+
+.datos {
+    margin-left: 30px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.datos h2 {
+    color: #fff;
+}
+
+.datos .input-material {
+    outline: none;
+    border: none;
+    background: none;
+    width: 400px;
+    border-bottom: solid 2px #fff;
+    display: block;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.informacion {
+    background: #f6f6f6;
+    font-family: 'Montserrat', sans-serif;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: -24px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.informacion .parrafo-info {
+    color: #828282;
+    font-size: 1.6rem;
+    margin-left: 40px;
+    margin-top: 15px;
+}
+
+.formulario-subir {
+    margin-top: 20px;
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.formulario-subir .lable {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.lable2 {
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.formulario-subir .lable3 {
+    margin-right: 20px;
+}
+
+.formulario-subir .boton {
+    border: 2px solid black;
+    background-color: var(--fuente-principal);
+    color: black;
+    padding: 10px 40px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.formulario-subir .hecho {
+    border-color: var(--fuente-principal);
+    color: #fff;
+}
+
+.paginacion {
+    text-align: center;
+}
+
+.datos-usuario {
+    margin-left: 30px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.datos-usuario h2 {
+    color: #fff;
+}
+
+.datos-usuario .nombre-usuario {
+    display: flex;
+}
+
+.datos-usuario .nombre-usuario .input-material {
+    outline: none;
+    border: none;
+    background: none;
+    width: 400px;
+    border-bottom: solid 2px #fff;
+    display: block;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.datos-usuario .nombre-usuario .pencil {
+    padding: 5px 10px;
+    background: #fff;
+    margin-left: 5px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.formulario-perfil {
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.formulario-perfil .lable {
+    font-weight: bold;
+}
+
+.lable2 {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.formulario-perfil .lable3 {
+    margin-right: 20px;
+}
+
+.formulario-perfil .boton {
+    border: 2px solid black;
+    background-color: var(--fuente-principal);
+    color: black;
+    padding: 10px 40px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.formulario-perfil .hecho {
+    border-color: var(--fuente-principal);
+    color: #fff;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+
+@media only screen and (max-width: 600px) {
+    .descubrir {
+        text-align: center;
+    }
+    .informacion .parrafo-info {
+        margin-left: 0;
+        text-align: center;
+    }
+    .datos {
+        margin-left: 10px;
+    }
+    .datos-usuario {
+        margin-left: 10px;
+    }
+    .datos .input-material {
+        outline: none;
+        border: none;
+        background: none;
+        width: 100%;
+        border-bottom: solid 2px #fff;
+        display: block;
+        color: #ffffff;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .datos-usuario .nombre-usuario .input-material {
+        outline: none;
+        border: none;
+        background: none;
+        width: 100%;
+        border-bottom: solid 2px #fff;
+        display: block;
+        color: #ffffff;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+}
