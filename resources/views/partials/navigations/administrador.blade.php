@@ -6,7 +6,7 @@
         <ul class="sub">
             <li><a  href="{{ route('users.view') }}">Usuarios</a></li>
             <li><a  href="{{ route('categories.view') }}">Categorías</a></li>
-            <li><a  href="panels.html">Autores</a></li>
+            <li><a  href="{{ route('authors.view') }}">Autores</a></li>
         </ul>
     </li>
     

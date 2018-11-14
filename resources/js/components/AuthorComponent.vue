@@ -1,9 +1,9 @@
 <template>
     <section>
         <div class="descubrir">
-            <h3><img :src="img" class="img-fluid" alt="">Categorías</h3>
-            <a @click.prevent="active(1)" href="#" class="parrafo" :class="{'active': active1}">Registro de Categorías</a>
-            <a @click.prevent="active(2)" href="#" class="parrafo" :class="{'active': active2}">Listado de Categorías</a>
+            <h3><img :src="img" class="img-fluid" alt="">Autores</h3>
+            <a @click.prevent="active(1)" href="#" class="parrafo" :class="{'active': active1}">Registro de Autores</a>
+            <a @click.prevent="active(2)" href="#" class="parrafo" :class="{'active': active2}">Listado de Autores</a>
         </div>
         <div class="registro animated fadeIn" v-if="active1">
             <form @submit.prevent="save()" class="form-horizontal">
@@ -14,8 +14,8 @@
                         <label for="name" class="col-sm-2 control-label">Nombre*</label>
                         <div class="col-sm-10">
                             <div class="input-group">
-                                <span class="input-group-addon" id="basic-addon2"><i class="fa fa-book"></i></span>
-                                <input type="text" v-model="form.name" class="form-control" placeholder="Nombre Categoría">
+                                <span class="input-group-addon" id="basic-addon2"><i class="fa fa-user"></i></span>
+                                <input type="text" v-model="form.name" class="form-control" placeholder="Nombre Autor">
                                 
                             </div>
                             <span class="help-block" v-if="errors.name">
@@ -53,14 +53,14 @@
 <script>
 import LoadingComponent from './LoadingComponent'; 
 export default {
-    name: 'CategoryComponent',
+    name: 'AuthorComponent',
     components: {LoadingComponent},
     props: {
         img: {
             type: String,
             required: true
         },
-        labels: {
+         labels: {
             type: Object,
             required: true
         },
@@ -133,14 +133,14 @@ export default {
             }
         },
         save(){
-            const url = '/categories';
+            const url = '/authors';
             this.loading = true;
             this.resetErrors();
             if(this.method == 'post'){
                 axios.post(url, this.form)
                 .then( response => {
                     console.log(response);
-                    this.$toasted.show('Categoría registrada correctamente', {type:'success', icon: 'check'});
+                    this.$toasted.show('Autor registrado correctamente', {type:'success', icon: 'check'});
                     this.reset();
                 })
                 .catch( err => {
@@ -160,7 +160,7 @@ export default {
                 axios.put(`${url}/${this.form.id}`, this.form)
                 .then( response => {
                     console.log(response);
-                    this.$toasted.show('Categoría editada correctamente', {type:'success', icon: 'check'});
+                    this.$toasted.show('Autor editado correctamente', {type:'success', icon: 'check'});
                     this.reset();
                 })
                 .catch( err => {

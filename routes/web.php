@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'administracion'], function () {
         Route::get('/usuarios','UserController@view')->name('users.view');
         Route::get('/categorias','CategoryController@view')->name('categories.view');
+        Route::get('/autores','AuthorController@view')->name('authors.view');
     });
 
     Route::group(['prefix' => 'users'], function() {
@@ -42,9 +43,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/{category}','CategoryController@update')->name('categories.edit');
     });
 
+    Route::group(['prefix' => 'authors'], function() {
+        Route::post('/','AuthorController@store')->name('authors.new');
+        Route::put('/{author}','AuthorController@update')->name('authors.edit');
+    });
+
     Route::group(['prefix' => 'json'], function () {
         Route::get('/users','UserController@usersJson')->name('users.json');
         Route::get('/categories','CategoryController@categoriesJson')->name('categories.json');
+        Route::get('/authors','AuthorController@authorsJson')->name('authors.json');
     });
     
 });

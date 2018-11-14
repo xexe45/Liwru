@@ -26,6 +26,7 @@ Vue.use(Toasted, {
 
 Vue.component('users-component', require('./components/UsersComponent.vue'));
 Vue.component('categories-component', require('./components/CategoryComponent.vue'));
+Vue.component('authors-component', require('./components/AuthorComponent.vue'));
 
 const app = new Vue({
     el: '#app'
