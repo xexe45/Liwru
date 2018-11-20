@@ -28,6 +28,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/subir', 'BookController@subir')->name('book.new');
+
     Route::group(['prefix' => 'administracion'], function () {
         Route::get('/usuarios','UserController@view')->name('users.view');
         Route::get('/categorias','CategoryController@view')->name('categories.view');
@@ -48,17 +50,27 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/{author}','AuthorController@update')->name('authors.edit');
     });
 
+    
+    Route::group(['prefix' => 'books'], function () {
+        Route::post('/', 'BookController@store')->name('books.new');
+    });
+    
+
     Route::group(['prefix' => 'json'], function () {
         Route::get('/users','UserController@usersJson')->name('users.json');
         Route::get('/categories','CategoryController@categoriesJson')->name('categories.json');
         Route::get('/authors','AuthorController@authorsJson')->name('authors.json');
     });
+
+    Route::group(['prefix' => 'search'], function () {
+        Route::get('/books','BookController@search')->name('books.search');
+        Route::get('/categories','CategoryController@search')->name('categories.search');
+        Route::get('/codes/{code}','BookController@getByCode')->name('code.search');
+    });
     
 });
 
-Route::get('/subir',function(){
-    return view('subir.subir');
-});
+
 Route::get('/perfil',function(){
     return view('user.profile');
 });

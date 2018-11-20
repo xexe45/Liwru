@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AuthorSaveRequest;
 use App\Http\Requests\AuthorUpdateRequest;
 use App\VueTables\EloquentVueTables;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthorController extends Controller
 {
@@ -55,14 +56,20 @@ class AuthorController extends Controller
     {
         $name = $request->name;
 
-        Author::create(
+        $autor = Author::create(
             [
                 'name' => $name,
                 'slug' => str_slug($name)
             ]
         );
 
-        return;
+        if($autor){
+            return response($autor,Response::HTTP_CREATED);
+        }
+
+        $error = ["error" => "No se pudo registrar"];
+        return response(json_encode($error),Response::HTTP_BAD_REQUEST);
+        
     }
 
     /**

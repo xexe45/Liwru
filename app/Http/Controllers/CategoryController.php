@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategorySaveRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\VueTables\EloquentVueTables;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
@@ -23,6 +24,17 @@ class CategoryController extends Controller
     public function view()
     {
         return view('admin.categories');
+    }
+
+    public function search(Request $request)
+    {
+        $q = $request->query('q');
+        $categories = \DB::table('categories')
+                ->select('id','name')
+                ->where('name', 'like', '%'.$q.'%')
+                ->get();
+
+        return $categories;
     }
 
     /**
@@ -45,14 +57,19 @@ class CategoryController extends Controller
     {
         $name = $request->name;
 
-        Category::create(
+        $category = Category::create(
             [
                 'name' => $name,
                 'slug' => str_slug($name)
             ]
         );
 
-        return;
+        if($category){
+            return response($category,Response::HTTP_CREATED);
+        }
+
+        $error = ["error" => "No se pudo registrar"];
+        return response(json_encode($error),Response::HTTP_BAD_REQUEST);
     }
 
     public function categoriesJson()

@@ -78,10 +78,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button @click="reset" type="button" class="boton2 cancelar">Cancelar</button>
-                            <button type="submit" class="boton hecho pull-right">Registrar</button>
-                        </div>
+                        <button @click="reset" type="button" class="boton2 cancelar">Cancelar</button>
+                        <button type="submit" class="boton hecho pull-right">Registrar</button>
+                        
                     </div>
                 </div>
                 
@@ -337,5 +336,17 @@ export default {
     color: #fff;
 }
 
+@media only screen and (max-width: 800px) {
+    .boton {
+       
+        padding: 10px 20px;
+        
+    }
+
+    
+    .boton2 {
+        padding: 10px 20px;
+    }
+}
 
 </style>

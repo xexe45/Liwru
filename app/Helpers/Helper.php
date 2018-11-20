@@ -6,7 +6,7 @@ class Helper{
 
     public static function uploadFile($key, $path)
     {
-		request()->file($key)->store($path);
+		request()->file($key)->store('public/'.$path);
 		return request()->file($key)->hashName();
     }
     

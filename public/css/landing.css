@@ -36,7 +36,6 @@
     height: 80%;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     padding: 50px;
 }
 
@@ -129,8 +128,18 @@
     .fondo {
         background-position: center center;
     }
+    .fondo .navegacion span {
+        font-size: .6rem;
+    }
     .liwru {
         padding: 20px;
+    }
+    .fondo .titulo h2 {
+        font-weight: bold;
+        font-size: 2.5rem;
+    }
+    .fondo .titulo p {
+        font-size: 1.3rem;
     }
     .fondo .title {
         padding: 20px;
