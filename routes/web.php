@@ -17,17 +17,15 @@ Route::get('/', function () {
 Route::get('/images/{path}/{attachment}', function($path, $attachment) {
 	$file = sprintf('storage/%s/%s', $path, $attachment);
 	if(File::exists($file)) {
-        $img = Image::make($file)->resize(200, 200);
+        $img = Image::make($file)->resize(150, 150);
 		return $img->response();
 	}
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::group(['middleware' => ['auth']], function () {
-
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/subir', 'BookController@subir')->name('book.new');
 
     Route::group(['prefix' => 'administracion'], function () {
@@ -53,6 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::group(['prefix' => 'books'], function () {
         Route::post('/', 'BookController@store')->name('books.new');
+        Route::post('/user','BookController@storeUser')->name('books.user.new');
     });
     
 

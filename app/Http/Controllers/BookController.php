@@ -6,6 +6,7 @@ use App\Book;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Http\Requests\BookSaveRequest;
+use App\Http\Requests\BookUserStoreRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends Controller
@@ -131,15 +132,74 @@ class BookController extends Controller
         return $authors;
     }
 
+    public function storeUser(BookUserStoreRequest $request){
+
+        //Revisar que el libro no lo tenga actualmente otro usuario, estado = 1
+
+        $book = \DB::table('book_user')->where([
+                ['book_id','=',$request->id_encontrado],
+                ['status','=',Book::DISPONIBLE]
+            ])->first();
+        
+        if(isset($book)){
+            return response()->json([
+                'ok' => false,
+                'message' => 'Actualmente este libro ya cuenta con un lector',
+                'estado' => '1'
+            ]);
+        }
+
+        //En este punto, el lector puede registrar el libro
+        try{
+            \DB::table('book_user')->insert(
+                [
+                    'book_id' => $request->id_encontrado,
+                    'user_id' => auth()->user()->id,
+                    'description' => $request->descripcion_encontrado,
+                    'status' => '1',
+                    'condicion' => $request->condicion_encontrado
+                   
+                ]
+            );
+
+            $success = true;
+            
+        }catch( \Exception $e ){
+
+            $success = false;
+
+        }
+
+        if(!$success){
+            return response()->json([
+                'ok' => false,
+                'message' => 'El libro no pudo registrarse a tu biblioteca.',
+                'estado' => '0'
+            ]);
+        }
+
+        return response()->json([
+            'ok' => true,
+            'message' => 'Libro registrado correctamente a tu biblioteca',
+        ]);
+
+       
+        
+
+    }
+
     public function getByCode($code)
     {
         $book = Book::where('liwru_code', $code)->first();
+
         
         if(!$book){
             return response()->json([
                 'ok' => false
             ]);
         }
+
+        $book->pathUrl = $book->path;
 
         return response()->json([
             'book' => $book,

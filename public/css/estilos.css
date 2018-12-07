@@ -69,6 +69,21 @@
     color: var(--fuente-principal) !important;
 }
 
+.coleccion {
+    margin-top: 20px;
+}
+
+.coleccion .coleccion-fila {}
+
+.coleccion .coleccion-fila .fila-item {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.coleccion .coleccion-fila .fila-item .texto {
+    padding: 20px;
+}
+
 .lista-libros {
     margin-top: 20px;
     display: flex;
@@ -89,6 +104,11 @@
 
 .lista-libros .libro .texto .tp {
     margin-top: -5px;
+}
+
+.fondo {
+    background: var(--fuente-principal) !important;
+    color: #fff;
 }
 
 .no-image .ima {

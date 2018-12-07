@@ -23,88 +23,53 @@
         <a href="#" class="parrafo active">Libros de Usuarios</a>
         <a href="#" class="parrafo">Libros de la Biblioteca</a>
     </div>
-    <div class="lista-libros">
-        <div class="libro">
-            <div class="imagen text-right">
-                <img src="{{ asset('imgs/leer.jpg') }}"  width="50%" alt="" class="img-fluid">
+    <div class="container-fluid coleccion">
+        @foreach ($books->chunk(3) as $chunk)
+            <div class="row coleccion-fila">
+                @foreach ($chunk as $book)
+                    <div class="col-md-4 fila-item">
+                        <a href="#">
+                            <img src="{{ $book->path }}" alt="" class="img-fluid">
+                        </a>
+                        <div class="texto">
+                            <p for=""><b>Título:</b></p>
+                            <p class="tp">{{ $book->title }}</p>
+                            <p for=""><b>Autores:</b></p>
+                            @foreach($book->authors as $author)
+                                <p class="tp">{{ $author->name }}</p>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
             </div>
-            <div class="texto">
-                <p for=""><b>Título:</b></p>
-                <p class="tp">Harry Potter</p>
-                <p for=""><b>Autor:</b></p>
-                <p class="tp">Juan Perez</p>
-            </div> 
+        @endforeach
+        <div class="text-center">
+            {{ $books->links() }}
         </div>
-        <div class="libro">
-            <div class="imagen text-right">
-                <img src="{{ asset('imgs/leer.jpg') }}" alt="" width="50%" class="img-fluid">
-            </div>
-            <div class="texto">
-                <p for=""><b>Título:</b></p>
-                <p class="tp">Harry Potter</p>
-                <p for=""><b>Autor:</b></p>
-                <p class="tp">Juan Perez</p>
-            </div>
-        </div>
-        <div class="libro">
-            <div class="imagen text-right">
-                <img src="{{ asset('imgs/leer.jpg') }}" width="50%" alt="" class="img-fluid">
-            </div>
-            <div class="texto">
-                <p for=""><b>Título:</b></p>
-                <p class="tp">Harry Potter</p>
-                <p for=""><b>Autor:</b></p>
-                <p class="tp">Juan Perez</p>
-            </div>
-        </div>
-        <div class="libro">
-            <div class="imagen text-right">
-                <img src="{{ asset('imgs/leer.jpg') }}" width="50%" alt="" class="img-fluid">
-            </div>
-            <div class="texto">
-                <p for=""><b>Título:</b></p>
-                <p class="tp">Harry Potter</p>
-                <p for=""><b>Autor:</b></p>
-                <p class="tp">Juan Perez</p>
-            </div> 
-        </div>
-        <div class="libro">
-            <div class="imagen text-right">
-                <img src="{{ asset('imgs/leer.jpg') }}" width="50%" alt="" class="img-fluid">
-            </div>
-            <div class="texto">
-                <p for=""><b>Título:</b></p>
-                <p class="tp">Harry Potter</p>
-                <p for=""><b>Autor:</b></p>
-                <p class="tp">Juan Perez</p>
-            </div> 
-        </div>
-        <div class="libro">
-                <div class="imagen text-right">
-                    <img src="{{ asset('imgs/leer.jpg') }}" width="50%" alt="" class="img-fluid">
-                </div>
-                <div class="texto">
-                    <p for=""><b>Título:</b></p>
-                    <p class="tp">Harry Potter</p>
-                    <p for=""><b>Autor:</b></p>
-                    <p class="tp">Juan Perez</p>
-                </div> 
-        </div>
+        
     </div>
-    <div class="paginacion">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-    </div>
+    <!--<div class="lista-libros">
+                    @forelse($books as $book)
+                    <div class="libro">
+                        
+                        <a href="#"><img src="{{ $book->path }}" alt="" class="img-fluid"></a>
+                        
+                        <div class="texto">
+                            <p for=""><b>Título:</b></p>
+                            <p class="tp">{{ $book->title }}</p>
+                            <p for=""><b>Autores:</b></p>
+                            @foreach($book->authors as $author)
+                                <p class="tp">{{ $author->name }}</p>
+                            @endforeach
+                            
+                        </div> 
+                    </div>
+                    @empty
+                        <p class="text-center">No se han registrado libros.</p>
+                    @endforelse
+    </div>-->
+    
+    
+    
     
 @endsection

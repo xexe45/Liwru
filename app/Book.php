@@ -21,4 +21,9 @@ class Book extends Model
     {
         return $this->belongsToMany('App\Category');
     }
+
+    public function getPathAttribute()
+    {
+        return "/images/books/{$this->picture}";
+    }
 }

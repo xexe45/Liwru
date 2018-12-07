@@ -87,18 +87,38 @@
     </div>
     <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header fondo">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Libro encontrado</h4>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body text-center">
+        <h3 id="titulo-encontrado"></h3>
+        <img id="imagen-encontrado" src="" alt="">
+        <p>ISBN: <span id="isbn-encontrado"></span></p>
+        <form action="{{ route('books.user.new') }}" id="frm-encontrado">
+            <input type="hidden" id="id_encontrado" name="id_encontrado">
+            <div class="form-group">
+                <textarea placeholder="Descripción de te ayudará a conseguir un intercambio más rápido" name="descripcion_encontrado" class="form-control" id="descripcion_encontrado"></textarea>
+            </div>
+            <div class="form-group">    
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" checked type="radio" name="condicion_encontrado" value="NUEVO">
+                    <label class="form-check-label" for="inlineRadio1">Nuevo</label>
+                                    
+                    <input class="form-check-input" type="radio" name="condicion_encontrado" value="SEMINUEVO">
+                    <label class="form-check-label" for="inlineRadio1">Seminuevo</label>
+                                    
+                    <input class="form-check-input" type="radio" name="condicion_encontrado" value="VIEJO">
+                    <label class="form-check-label" for="inlineRadio1">Viejo</label>
+                </div>
+            </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="submit" form="frm-encontrado" class="btn fondo">Guardar!</button>
       </div>
     </div>
   </div>
@@ -135,10 +155,63 @@
                         swal("Ooops","No se encontró un libro con ese código :(",'warning');
                         return;
                     }
+                    console.log(response);
+                    $('#titulo-encontrado').text(response['book']['title']);
+                    $('#imagen-encontrado').attr('src',response['book']['pathUrl']);
+                    $('#isbn-encontrado').text(response['book']['isbn']);
+                    $('#id_encontrado').val(response['book']['id']);
                     $('#myModal').modal();
                 }, 'json')
 
             });
+
+            //Registrar libro encontrado
+            $('#frm-encontrado').on('submit', function(e){
+                e.preventDefault();
+                let action = $(this).attr('action')
+                let data = $(this).serialize();
+                $.ajax({
+                    url:  action,
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response){
+                        console.log(response);
+                        
+                        if(!response['ok']){
+                            if(response['estado'] == 1){
+                                swal('Oooops!', `${response['message']}, puede que el lector haya olvidado actualizar el estado del libro, le notificaremos para que realice esta acción, lo sentimos!`,'warning')
+                                return;
+                            }else{
+                                swal('Oooops!', response['message'],'danger')
+                                return;
+                            }
+                        }
+
+                        swal('Liwru Informa', response['message'],'success');
+                        $('#myModal').modal('hide');
+
+                    },
+                    error: function(xhr, textStatus, errorThrown ){
+                        let errors = xhr.responseJSON.errors;
+                        console.log(errors);
+                        let r = [];
+                        if(errors.id_encontrado){
+                            r.push(errors.id_encontrado[0]);
+                        }
+                        if(errors.condicion_encontrado){
+                            r.push(errors.condicion_encontrado[0]);
+                        }
+                        if(errors.descripcion_encontrado){
+                            r.push(errors.descripcion_encontrado[0]);
+                        }
+                        let mensaje = r.join("<p></p>");
+                        swal('Ooops', mensaje, 'error');
+                    }
+
+                });
+            });
+            
             //Nuevos Elementos
             $('#newA').on('click', function(e){
                 e.preventDefault();
