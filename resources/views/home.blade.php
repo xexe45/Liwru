@@ -24,7 +24,7 @@
         <a href="#" class="parrafo">Libros de la Biblioteca</a>
     </div>
     <div class="container-fluid coleccion">
-        @foreach ($books->chunk(3) as $chunk)
+        @forelse ($books->chunk(3) as $chunk)
             <div class="row coleccion-fila">
                 @foreach ($chunk as $book)
                     <div class="col-md-4 fila-item">
@@ -42,7 +42,10 @@
                     </div>
                 @endforeach
             </div>
-        @endforeach
+        @empty
+            <p>No se han publicado libros</p>
+        @endforelse
+        
         <div class="text-center">
             {{ $books->links() }}
         </div>

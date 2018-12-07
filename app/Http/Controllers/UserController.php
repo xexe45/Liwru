@@ -47,4 +47,14 @@ class UserController extends Controller
 		}
 		return abort(401);
     }
+
+    public function librosSubidos(Request $request)
+    {
+        $type = $request->query('type') ? $request->query('type') : 'image';
+
+        $user = auth()->user();
+        $libros = $user->books;
+        
+        return view('user.subidos', compact('libros','type'));
+    }
 }

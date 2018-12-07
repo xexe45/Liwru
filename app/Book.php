@@ -26,4 +26,9 @@ class Book extends Model
     {
         return "/images/books/{$this->picture}";
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
 }

@@ -7,6 +7,10 @@
 
 /* Style the input container */
 
+.mb-2 {
+    margin-bottom: 20px;
+}
+
 .input-container {
     display: flex;
     width: 100%;
@@ -140,6 +144,35 @@
     font-weight: bold;
 }
 
+.informacion-subida {
+    background: #f6f6f6;
+    font-family: 'Montserrat', sans-serif;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: -24px;
+    font-weight: bold;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.informacion-subida .parrafo-info {
+    color: #828282;
+    font-size: 1.6rem;
+    margin-left: 40px;
+    margin-top: 15px;
+}
+
+.grid-item {
+    width: 200px;
+}
+
+.grid-item--width2 {
+    width: 400px;
+}
+
 .informacion {
     background: #f6f6f6;
     font-family: 'Montserrat', sans-serif;
@@ -204,8 +237,16 @@
     color: #fff;
 }
 
+.datos-usuario .perfil-h3 {
+    color: #fff;
+}
+
 .datos-usuario .nombre-usuario {
     display: flex;
+}
+
+.datos-usuario .nombre-usuario h2 {
+    color: #fff;
 }
 
 .datos-usuario .nombre-usuario .input-material {

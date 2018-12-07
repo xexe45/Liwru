@@ -25,8 +25,14 @@ Route::get('/images/{path}/{attachment}', function($path, $attachment) {
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
+    
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/subir', 'BookController@subir')->name('book.new');
+    
+    Route::group(['prefix' => 'perfil'], function() {
+        Route::get('/libros-subidos', 'UserController@librosSubidos')->name('subidos.list');
+    });
+    
 
     Route::group(['prefix' => 'administracion'], function () {
         Route::get('/usuarios','UserController@view')->name('users.view');
