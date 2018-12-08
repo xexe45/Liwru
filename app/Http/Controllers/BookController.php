@@ -207,6 +207,44 @@ class BookController extends Controller
         ]);
     }
 
+    public function showPivot($id)
+    {
+        $user = auth()->user();
+        $libro = $user->books()->wherePivot('id',$id)->first();
+        return $libro;
+    }
+
+    public function updatePivot(Request $request,$id)
+    {
+        try{
+
+            \DB::table('book_user')
+            ->where('id', $id)
+            ->update(
+                [
+                    'description' => $request->descripcion_encontrado,
+                    'condicion' => $request->condicion_encontrado
+                ]
+            );
+            $success = true;
+        }catch( \Exception $e ){
+            $success = false;
+        }
+       
+        if(!$success){
+            return response()->json([
+                'ok' => false,
+                'message' => 'La información del libro no pudo editarse.',
+            ]);
+        }
+
+        return response()->json([
+            'ok' => true,
+            'message' => 'La información del libro fue editada correctamente',
+        ]);
+
+    }
+
     /**
      * Display the specified resource.
      *
@@ -250,5 +288,21 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         //
+    }
+
+    public function deletePivot($id)
+    {
+        try{
+            
+            //$book_user = \DB::table('book_user')->where('id', $id)->first();
+            \DB::table('book_user')->where('id', $id)->delete();
+            //\Storage::disk('public')->delete('books/'.$book_user->picture);
+            $success = true;
+
+        }catch(\Exception $e){
+            $success = false;
+        }
+
+       return back();
     }
 }

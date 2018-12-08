@@ -53,8 +53,7 @@ class UserController extends Controller
         $type = $request->query('type') ? $request->query('type') : 'image';
 
         $user = auth()->user();
-        $libros = $user->books;
-        
+        $libros = $user->books()->wherePivot('status','<>','2')->get();
         return view('user.subidos', compact('libros','type'));
     }
 }

@@ -59,6 +59,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/', 'BookController@store')->name('books.new');
         Route::post('/user','BookController@storeUser')->name('books.user.new');
     });
+
+    Route::group(['prefix' => 'books-pivot'], function () {
+        Route::get('/{id}','BookController@showPivot')->name('books.pivot.show');
+        Route::put('/{id}','BookController@updatePivot')->name('books.pivot.update');
+        Route::delete('/{id}','BookController@deletePivot')->name('books.pivot.delete');
+    });
     
 
     Route::group(['prefix' => 'json'], function () {
