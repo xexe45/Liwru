@@ -19,7 +19,7 @@
     </a>
     <ul class="sub">
         <li><a  href="{{ route('subidos.list') }}">Subidos</a></li>
-        <li><a  href="buttons.html">Intercambiados</a></li>
+        <li><a  href="{{ route('intercambiados.list') }}">Intercambiados</a></li>
     </ul>
 </li>
 

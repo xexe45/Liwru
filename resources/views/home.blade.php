@@ -28,7 +28,7 @@
             <div class="row coleccion-fila">
                 @foreach ($chunk as $book)
                     <div class="col-md-4 fila-item">
-                        <a href="#">
+                        <a href="{{ route('books.show', ['book' => $book->id]) }}">
                             <img src="{{ $book->path }}" alt="" class="img-fluid">
                         </a>
                         <div class="texto">
@@ -37,6 +37,10 @@
                             <p for=""><b>Autores:</b></p>
                             @foreach($book->authors as $author)
                                 <p class="tp">{{ $author->name }}</p>
+                            @endforeach
+                            
+                            @foreach($book->categories as $category)
+                                <span class="label label-default">{{ $category->name }}</span>
                             @endforeach
                         </div>
                     </div>

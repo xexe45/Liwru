@@ -6,51 +6,70 @@
 @endpush
 @section('content_header')
     <div class="no-image">
-        <img id="clickImage" src="{{ $user->pathAttachment() }}" width="100px" class="img-fluid img-thumbnail ima" alt="">
-        <input type="file" id="file" name="file" class="elegir">
+        <img src="{{ $data['book']->path }}" class="img-fluid img-thumbnail ima" alt="">
     </div>
     <div class="datos-usuario">
-        <h2>Perfil de Usuario</h2>
+        <h2>{{ $data['book']->title }}</h2>
         <div class="nombre-usuario">
-            <input type="text" id="name" name="name" class="input-material" autofocus value="{{ $user->name }}">
-            <div class="pencil"><i class="fa fa-pencil"></i></div>
+            <h4 class="quien-sube">{{ $data['user']->name }}</h4>
         </div>
         
     </div>
 @endsection
 @section('content')
-<div class="formulario-perfil">
-        <div class="col-md-6">
-            <form>
-                <div class="form-group row">
-                    <label for="autor" class="col-sm-3 col-form-label lable">Correo Electrónico *:</label>
-                    <div class="col-sm-9">
-                        <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="isbn" class="col-sm-3 col-form-label lable">Número de Teléfono *:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="phone" name="phone" value="{{ $user->phone }}">
-                        
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="isbn" class="col-sm-3 col-form-label lable">Fecha de Nacimiento *:</label>
-                    <div class="col-sm-9">
-                        <input type="date" class="form-control" id="birthday" name="birthday" value="{{ $user->birthday }}">
-                    </div>
-                </div>
-                
-                <div class="form-group text-right">
-                    <i id="cargando" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-                    <button type="button" id="frm-user" class="boton hecho">Guardar</button>
-                </div>
-                
-            </form>
+    <div class="informacion">
+        <p class="parrafo-info">Información Detallada por el lector</p>
+    </div>
+    <div class="row informacion-cambio">
+        <div class="col-xs-4 col-md-4 text-center cambio">
+            <img src="{{ asset('imgs/pen.png') }}" class="img-fluid" alt="">
+            <h4>Autores</h4>
+            @foreach ($data['book']->authors as $author)
+                <span class="label label-default">{{ $author->name }}</span>
+            @endforeach
         </div>
-</div>
+        <div class="col-xs-4 col-md-4 text-center cambio">
+            <img src="{{ asset('imgs/bookshelf.png') }}" class="img-fluid" alt="">
+            <h4>Categorías</h4>
+            @foreach ($data['book']->categories as $category)
+                <span class="label label-default">{{ $category->name }}</span>
+            @endforeach
+        </div>
+        <div class="col-xs-4 col-md-4 text-center cambio">
+            <img src="{{ asset('imgs/shield.png') }}" class="img-fluid" alt="">
+            <h4>Estado</h4>
+            @if($data['book_user']->condicion == 'NUEVO')
+                <span class="label label-success">{{ $data['book_user']->condicion }}</span>
+            @elseif($data['book_user']->condicion == 'SEMINUEVO')
+                <span class="label label-warning">{{ $data['book_user']->condicion }}</span>
+            @elseif($data['book_user']->condicion == 'VIEJO')
+                <span class="label label-danger">{{ $data['book_user']->condicion }}</span>
+            @endif
+            
+        </div>
+        
+    </div>
+    <div class="row informacion-cambio">
+        <div class="col-md-12 text-center">
+            <div class="cambio">
+                <img src="{{ asset('imgs/wishlist.png') }}" class="img-fluid" alt="">
+                <h4>Condiciones del Lector</h4>
+                <hr>
+                <p>{{ $data['book_user']->description }}</p>
+            </div>
+                    
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group cambio">
+                    <i id="cargando" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                    <button type="button" class="boton hecho btn-block" id="guardar">
+                        <i class="fa fa-exchange" aria-hidden="true"></i> Intercambiar
+                    </button>
+            </div>
+        </div>
+    </div>
 
 @endsection
 @push('scripts')
@@ -81,7 +100,7 @@
             $('#frm-user').on('click', function(){
                 
                
-                const formData = new FormData();
+                let formData = new FormData();
                 
                 formData.append('name',$('#name').val());
                 formData.append('phone', $('#phone').val());

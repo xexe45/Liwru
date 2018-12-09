@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\User;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Http\Requests\BookSaveRequest;
@@ -251,9 +252,28 @@ class BookController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($book)
     {
-        //
+        $data = [];
+
+        $book_user = \DB::table('book_user')->select('id', 'book_id','user_id','description','status','condicion')->where([
+            ['book_id','=',$book],
+            ['status', '=', (string)Book::DISPONIBLE]
+        ])->get();
+
+        if(count($book_user) == 0){
+            return redirect()->route('home');
+        }
+
+        $libro = Book::with(['authors','categories'])->find($book_user[0]->book_id);
+        $usuario = User::find($book_user[0]->user_id);
+
+        $data['book_user'] = $book_user[0];
+        $data['book'] = $libro;
+        $data['user'] = $usuario;
+        
+        return view('books.book',["data" => $data]);
+        
     }
 
     /**

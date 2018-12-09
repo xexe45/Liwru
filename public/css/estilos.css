@@ -4,6 +4,11 @@
     --fuente-texto: #717171;
 }
 
+pre {
+    white-space: normal !important;
+    display: none !important;
+}
+
 
 /* Style the input container */
 
@@ -89,7 +94,7 @@
 }
 
 .coleccion .coleccion-fila .fila-item .texto {
-    padding: 20px;
+    padding: 5px;
 }
 
 .lista-libros {
@@ -273,6 +278,10 @@
     cursor: pointer;
 }
 
+.datos-usuario .nombre-usuario .quien-sube {
+    color: #fff;
+}
+
 .formulario-perfil {
     padding: 20px;
     font-family: 'Montserrat', sans-serif;
@@ -301,6 +310,33 @@
 }
 
 .formulario-perfil .hecho {
+    border-color: var(--fuente-principal);
+    color: #fff;
+}
+
+.informacion-cambio .cambio {
+    padding: 20px;
+}
+
+.informacion-cambio .cambio h4 {
+    margin-top: 20px;
+}
+
+.informacion-cambio .cambio hr {
+    width: 30%;
+    border: 1px solid var(--fuente-principal);
+}
+
+.cambio .boton {
+    border: 2px solid black;
+    background-color: var(--fuente-principal);
+    color: black;
+    padding: 10px 40px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.cambio .hecho {
     border-color: var(--fuente-principal);
     color: #fff;
 }

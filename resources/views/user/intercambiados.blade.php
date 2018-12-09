@@ -24,8 +24,8 @@
     <p class="parrafo-info">LIBROS SUBIDOS</p>
     
     <div class="btn-group" role="group" aria-label="...">
-        <a href="/perfil/libros-subidos" class="btn btn-default"><i class="fa fa-image" aria-hidden="true"></i></a>
-        <a href="/perfil/libros-subidos?type=tabla" class="btn btn-default"><i class="fa fa-table" aria-hidden="true"></i></a>
+        <a href="/perfil/libros-intercambiados" class="btn btn-default"><i class="fa fa-image" aria-hidden="true"></i></a>
+        <a href="/perfil/libros-intercambiados?type=tabla" class="btn btn-default"><i class="fa fa-table" aria-hidden="true"></i></a>
     </div>
     
 </div>
@@ -56,8 +56,6 @@
                             <tr>
                                 <th>ISBN</th>
                                 <th>TÍTULO</th>
-                                <th>AUTOR/ES</th>
-                                <th>CATEGORÍA/S</th>
                                 <th>IMAGEN</th>
                                 <th>LIWRU CODE</th>
                                 <th>DESCRIPCIÓN</th>
@@ -72,57 +70,22 @@
                                     <td>{{ $libro->isbn }}</td>
                                     <td>{{ $libro->title }}</td>
                                     <td>
-                                        @foreach ($libro->authors as $author)
-                                            <span class="label label-default">{{ $author->name }}</span>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($libro->categories as $category)
-                                            <span class="label label-default">{{ $category->name }}</span>
-                                        @endforeach
-                                    </td>
-                                    <td>
                                         <img src="{{ $libro->path }}" alt="" class="img-fluid">
                                     </td>
                                     <td>{{ $libro->liwru_code }}</td>
                                     <td>{{ $libro->pivot->description }}</td>
                                     <td>{{ $libro->pivot->condicion }}</td>
                                     <td>
-                                        @if( $libro->pivot->status == 1 )
-                                            <span class="label label-success">Disponible</span>
-                                        @elseif ( $libro->pivot->status == 2 )
-                                            <span class="label label-primary">Intercambiado</span>
+                                        @if( $libro->pivot->status == 2 )
+                                            <span class="label label-success">Intercambiado</span>
                                         
-                                        @elseif ( $libro->pivot->status == 0 )
-                                            <span class="label label-warning">Con solicitud de intercambio</span>
                                         @endif
                                     </td>
                                     <td>
-                                        @if( $libro->pivot->status == 1 )
-                                            <button class="btn btn-info btn-sm" onclick="actualizar({{ $libro->pivot->id }})"><i class="fa fa-pencil"></i> Editar</button>
-                                            <a class="btn btn-danger btn-sm" href="{{ route('books.pivot.delete', ['id' => $libro->pivot->id]) }}"
-                                            onclick="event.preventDefault();
-                                            document.getElementById('form-delete').submit();"
-                                         >
-                                            <i class="fa fa-trash-o"></i>
-                                             <span>{{ __("Borrar") }}</span>
-                                         </a>
-                                    
-                                         <form id="form-delete" action="{{ route('books.pivot.delete', ['id' => $libro->pivot->id]) }}" method="POST" style="display: none;">
-                                            @method('DELETE') 
-                                            @csrf
-                                         </form>
-                                        @elseif ( $libro->pivot->status == 2 )
-                                            <button class="btn btn-primary btn-sm">Detalles de Intercambio</button>    
-                                        @elseif ( $libro->pivot->status == 0 )
-                                            <button class="btn btn-warning btn-sm">Ver solicitud de intercambio</button>
+                                        @if ( $libro->pivot->status == 2 )
+                                            <button class="btn btn-primary btn-sm"><i class="fa fa-upload"></i> Subir Libro</button>
                                         @endif
-                                        
-                                        
                                     </td>
-                                    
-                                       
-                                    
                                 </tr>
                             @empty
                                             

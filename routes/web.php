@@ -28,36 +28,45 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/subir', 'BookController@subir')->name('book.new');
+
+    Route::group(['middleware' => [sprintf("role:%s", \App\Role::ADMINISTRADOR)]], function () {
+        Route::group(['prefix' => 'administracion'], function () {
+            Route::get('/usuarios','UserController@view')->name('users.view');
+            Route::get('/categorias','CategoryController@view')->name('categories.view');
+            Route::get('/autores','AuthorController@view')->name('authors.view');
+        });
+        Route::group(['prefix' => 'users'], function() {
+            Route::post('/','UserController@store')->name('users.new');
+        });
+    
+        Route::group(['prefix' => 'categories'], function() {
+            Route::post('/','CategoryController@store')->name('categories.new');
+            Route::put('/{category}','CategoryController@update')->name('categories.edit');
+        });
+    
+        Route::group(['prefix' => 'authors'], function() {
+            Route::post('/','AuthorController@store')->name('authors.new');
+            Route::put('/{author}','AuthorController@update')->name('authors.edit');
+        });
+
+        Route::group(['prefix' => 'json'], function () {
+            Route::get('/users','UserController@usersJson')->name('users.json');
+            Route::get('/categories','CategoryController@categoriesJson')->name('categories.json');
+            Route::get('/authors','AuthorController@authorsJson')->name('authors.json');
+        });
+    });
     
     Route::group(['prefix' => 'perfil'], function() {
+        Route::get('/','UserController@profile')->name('profile');
         Route::get('/libros-subidos', 'UserController@librosSubidos')->name('subidos.list');
+        Route::get('/libros-intercambiados', 'UserController@librosIntercambiado')->name('intercambiados.list');
+        Route::post('/','UserController@update')->name('profile.update');
     });
-    
-
-    Route::group(['prefix' => 'administracion'], function () {
-        Route::get('/usuarios','UserController@view')->name('users.view');
-        Route::get('/categorias','CategoryController@view')->name('categories.view');
-        Route::get('/autores','AuthorController@view')->name('authors.view');
-    });
-
-    Route::group(['prefix' => 'users'], function() {
-        Route::post('/','UserController@store')->name('users.new');
-    });
-
-    Route::group(['prefix' => 'categories'], function() {
-        Route::post('/','CategoryController@store')->name('categories.new');
-        Route::put('/{category}','CategoryController@update')->name('categories.edit');
-    });
-
-    Route::group(['prefix' => 'authors'], function() {
-        Route::post('/','AuthorController@store')->name('authors.new');
-        Route::put('/{author}','AuthorController@update')->name('authors.edit');
-    });
-
     
     Route::group(['prefix' => 'books'], function () {
         Route::post('/', 'BookController@store')->name('books.new');
         Route::post('/user','BookController@storeUser')->name('books.user.new');
+        Route::get('/{book}','BookController@show')->name('books.show');
     });
 
     Route::group(['prefix' => 'books-pivot'], function () {
@@ -66,13 +75,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/{id}','BookController@deletePivot')->name('books.pivot.delete');
     });
     
-
-    Route::group(['prefix' => 'json'], function () {
-        Route::get('/users','UserController@usersJson')->name('users.json');
-        Route::get('/categories','CategoryController@categoriesJson')->name('categories.json');
-        Route::get('/authors','AuthorController@authorsJson')->name('authors.json');
-    });
-
     Route::group(['prefix' => 'search'], function () {
         Route::get('/books','BookController@search')->name('books.search');
         Route::get('/categories','CategoryController@search')->name('categories.search');
@@ -82,6 +84,4 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-Route::get('/perfil',function(){
-    return view('user.profile');
-});
+
